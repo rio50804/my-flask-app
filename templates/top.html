@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiAR / LoVER</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===============================
+           ① 新しい背景の設定
+           =============================== */
+        :root {
+            --bg-deep: #140024;
+            --neon-pink: #ff2ea6;
+            --neon-cyan: #00f5ff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-deep); /* いただいた深い紫の背景色 */
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative; /* アイコンを絶対配置するための基準 */
+        }
+
+        /* 背景のネオンアイコン装飾 */
+        .icon-heart {
+            position: absolute;
+            left: 40px;
+            top: 50px;
+            font-size: 88px;
+            color: var(--neon-pink);
+            opacity: 0.22;
+            text-shadow: 0 0 10px rgba(255,46,166,0.6), 0 0 18px rgba(255,46,166,0.4);
+            z-index: 0;
+        }
+
+        .icon-question {
+            position: absolute;
+            right: 40px;
+            bottom: 60px;
+            font-size: 92px;
+            color: var(--neon-cyan);
+            opacity: 0.22;
+            text-shadow: 0 0 10px rgba(0,245,255,0.6), 0 0 18px rgba(0,245,255,0.4);
+            z-index: 0;
+        }
+
+        /* 画面下部の「恋愛 × ミステリー × AI」装飾 */
+        .footer-decor {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            box-sizing: border-box;
+            z-index: 0;
+        }
+        .footer-dots span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 8px;
+        }
+        .dot-pink { background-color: var(--neon-pink); }
+        .dot-cyan { background-color: var(--neon-cyan); }
+        .footer-text {
+            color: #c7c7cf;
+            font-size: 14px;
+        }
+
+        /* ===============================
+           ② 文字とボタンの設定（いじってません！）
+           =============================== */
+        .title-content {
+            text-align: center;
+            z-index: 10; /* 背景アイコンより手前に表示 */
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            margin-bottom: 70px;
+            color: #e0d5eb;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .irresistible-btn {
+            position: relative;
+            padding: 20px 60px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #ff0055, #9d00ff, #00f2ff);
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6), 0 0 40px rgba(0, 242, 255, 0.4);
+            transition: all 0.3s ease;
+            animation: gradientMove 3s ease infinite, heartbeat 1.5s infinite;
+        }
+
+        .irresistible-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.9), 0 0 60px rgba(0, 242, 255, 0.7);
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.05); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    
+    <i class="fas fa-heart icon-heart"></i>
+    <i class="fas fa-question icon-question"></i>
+    
+    <div class="footer-decor">
+        <div class="footer-dots">
+            <span class="dot-pink"></span><span class="dot-cyan"></span>
+        </div>
+        <div class="footer-text">恋愛 × ミステリー × AI</div>
+    </div>
+
+    <div class="title-content">
+        <h1 class="main-title">LiAR / LoVER</h1>
+        <p class="subtitle">愛は、嘘を見抜けるか。</p>
+        <!--ボタンを押したら、Flaskの/selectに移動する-->
+        <button class="irresistible-btn" onclick="location.href='/select'">今すぐプレイ！</button>
+    </div>
+
+</body>
+</html>

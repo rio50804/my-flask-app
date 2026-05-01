@@ -1,0 +1,22 @@
+{
+    "venvPath": "c:/liar_lover_game - コピー",
+    "venv": ".venv",
+    "include": [
+        "app.py"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/__pycache__",
+        ".venv",
+        "**/.*"
+    ],
+    "executionEnvironments": [
+        {
+            "root": "c:/liar_lover_game - コピー",
+            "pythonVersion": "3.13",
+            "extraPaths": [
+                "c:/liar_lover_game - コピー/.venv/Lib/site-packages"
+            ]
+        }
+    ]
+}

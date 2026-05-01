@@ -1,0 +1,439 @@
+/* =========================================================
+   全体の色設定（変数）
+   ここで色を定義しておくと、後で一括変更できて便利です
+========================================================= */
+:root {
+    --bg-color: #000;       /* 背景色（黒） */
+    --primary: #00f2ff;     /* メインカラー（サイバーな水色） */
+    --secondary: #ff0055;   /* アクセントカラー（サイバーなピンク） */
+}
+
+/* =========================================================
+   Webページ全体の基本設定
+========================================================= */
+body {
+    background-color: #111; /* 画面全体の背景色（少し暗いグレー） */
+    margin: 0;              /* ブラウザが勝手につける余白を消す */
+    font-family: 'Zen Kaku Gothic New', sans-serif; /* 全体のフォント指定 */
+    color: #fff;            /* 基本の文字色（白） */
+    width: 100vw;           /* 画面の幅いっぱいに広げる */
+    height: 100vh;          /* 画面の高さぴったりに合わせる */
+    overflow: hidden;       /* 画面外にはみ出した部分を隠す（スクロールさせない） */
+}
+
+/* =========================================================
+   画面レイアウトの大枠（左・中央・右の3カラム）
+========================================================= */
+.dashboard-layout {
+    display: flex;             /* 横並びにする設定 */
+    justify-content: center;   /* 全体を中央寄せにする */
+    align-items: center;       /* 縦方向の中央に配置する */
+    width: 100%;               /* 幅を100%使う */
+    height: 100%;              /* 高さを100%使う */
+    gap: 40px;                 /* 3つのパネルの間の隙間を40pxにする */
+}
+
+/* =========================================================
+   左右のパネル（左のキャラ選択、右のランキング）の共通デザイン
+========================================================= */
+.side-panel {
+    width: 340px;              /* パネルの横幅 */
+    height: 672px;             /* ★変更：スマホ画面と同じ高さで固定する */
+    background: #1a1a1a;       /* パネルの背景色 */
+    border: 2px solid #333;    /* パネルの枠線（少し明るいグレー） */
+    border-radius: 20px;       /* 角を丸くする */
+    padding: 20px;             /* パネルの内側の余白 */
+    box-sizing: border-box;    /* パディングを含めて幅を計算する設定 */
+    display: flex;             /* 中身を縦に並べるための準備 */
+    flex-direction: column;    /* 縦並びに指定 */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* パネルの周りに影をつける */
+}
+
+/* 左右パネルの一番上にあるタイトル文字 */
+.panel-title {
+    text-align: center;        /* 文字を中央寄せ */
+    color: var(--primary);     /* 水色にする */
+    font-family: 'Orbitron', sans-serif; /* デジタルっぽいフォント */
+    margin-top: 0;             /* 上の余白をなくす */
+    border-bottom: 1px solid #333; /* 下に線を引いて区切る */
+    padding-bottom: 10px;      /* 線の上の余白 */
+}
+
+/* =========================================================
+   左パネル：円形カルーセル（回るアイコン）の設定
+========================================================= */
+#carousel-container {
+    position: relative;        /* アイコンを絶対位置で配置するための基準にする */
+    width: 100%;               /* 幅いっぱい */
+    height: 140px;             /* カルーセルエリアの高さ */
+    margin: 10px 0;            /* 上下の余白 */
+}
+
+/* カルーセルの中の1つ1つのキャラアイコン */
+.carousel-item {
+    position: absolute;        /* 基準（コンテナ）の中で自由に動かせるようにする */
+    width: 50px;               /* アイコンの幅 */
+    height: 50px;              /* アイコンの高さ */
+    border-radius: 50%;        /* まん丸にする */
+    background-size: cover;    /* 画像が枠にぴったり収まるようにする */
+    background-position: center;/* 画像の中央を表示する */
+    border: 2px solid #555;    /* アイコンの枠線 */
+    transform: translate(-50%, -50%); /* アイコンの中心を基準にして配置するための計算 */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* 動く時のアニメーション（滑らかに） */
+    cursor: pointer;           /* マウスを乗せた時に指マークにする */
+}
+
+/* 今選ばれているキャラアイコン（一番手前） */
+.carousel-item.active {
+    border-color: var(--primary); /* 枠線を水色にする */
+    box-shadow: 0 0 15px var(--primary); /* 水色に光らせる */
+}
+
+/* =========================================================
+   左パネル：選択中のキャラクタープロフィール
+========================================================= */
+.profile-card {
+    flex: 1;                   /* 余った縦幅をすべて使う */
+    display: flex;             /* 縦並びの準備 */
+    flex-direction: column;    /* 縦並びに指定 */
+    align-items: center;       /* 中央寄せ */
+    justify-content: flex-start; /* 上から順番に詰めて配置 */
+    background: #111;          /* 背景色を少し暗く */
+    border-radius: 10px;       /* 角を丸く */
+    padding: 15px;             /* 内側の余白 */
+    text-align: center;        /* 文字を中央寄せ */
+}
+
+/* 一番目立たせたい大きな顔写真 */
+.profile-main-img {
+    width: 180px;              /* かなり大きく設定 */
+    height: 180px;             /* かなり大きく設定 */
+    border-radius: 50%;        /* まん丸にする */
+    background-size: cover;    /* 画像を枠いっぱいに表示 */
+    background-position: center;/* 画像の中央を表示 */
+    border: 3px solid var(--primary); /* 水色の太い枠線 */
+    margin-bottom: 10px;       /* 下の余白 */
+    margin-top: 5px;           /* 上の余白 */
+    flex-shrink: 0;            /* 画面が狭くなっても画像が潰れないようにする */
+}
+
+/* プロフィールの文字設定 */
+#main-profile-name {
+    margin: 0; 
+    color: var(--primary); 
+    font-size: 1.2rem; 
+}
+#main-profile-job {
+    font-size: 0.8rem; 
+    color: #888; 
+    margin-top: 5px;
+}
+#main-profile-bio {
+    font-size: 0.8rem; 
+    margin-top: 15px; 
+    flex: 1; 
+    text-align: left; 
+    line-height: 1.5; /* 行間を少しあけて読みやすくする */
+}
+
+/* =========================================================
+   中央パネル：スマホ（iPhone）のモックアップデザイン
+========================================================= */
+.iphone-bezel {
+    width: 375px;              /* スマホの横幅 */
+    height: 672px;             /* スマホの高さ */
+    background: #000;          /* スマホ本体の色 */
+    border-radius: 40px;       /* スマホの角の丸み */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 10px #333; /* 外側の影と、内側の反射光 */
+    border: 12px solid #555555;   /* スマホのフチ（ベゼル） */
+    position: relative; 
+    overflow: hidden;          /* 画面からはみ出た部分を隠す */
+}
+
+/* 画面上部の切り欠き（インカメラの部分） */
+.iphone-notch {
+    position: absolute;        /* 画面の一番上に固定 */
+    top: 0; 
+    left: 50%;                 /* 左右中央に配置 */
+    transform: translateX(-50%); 
+    width: 150px; 
+    height: 30px; 
+    background: #222; 
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px; 
+    z-index: 100;              /* 一番手前に表示 */
+}
+
+/* スマホの液晶画面部分 */
+.iphone-screen {
+    width: 100%; 
+    height: 100%; 
+    background: #050505;       /* 液晶の背景色 */
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+/* スマホ内の各画面（ログイン、チャットなど）の切り替え設定 */
+.screen {
+    display: none;             /* 基本はすべて非表示にしておく */
+    height: 100%; 
+    flex-direction: column; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    padding-top: 50px;         /* ノッチ（切り欠き）に被らないように上を空ける */
+}
+.screen.active {
+    display: flex;             /* 「active」というクラスが付いた画面だけ表示する */
+}
+
+/* =========================================================
+   UIパーツ（タイトル、入力欄、ボタンなど）
+========================================================= */
+.glitch-title {
+    font-family: 'Orbitron'; 
+    font-size: 2.2rem; 
+    color: var(--primary); 
+    text-align: center; 
+    margin-bottom: 10px; 
+}
+
+/* ログイン入力枠 */
+.login-box {
+    text-align: center; 
+    margin-top: 50px; 
+}
+.login-box input {
+    width: 80%; 
+    padding: 12px; 
+    margin-bottom: 20px; 
+    text-align: center; 
+    border-radius: 5px; 
+    border: 1px solid #555; 
+    background: #222; 
+    color: #fff; 
+    font-size: 1rem; 
+}
+
+/* サイバー風のカッコいいボタン */
+.cyber-btn {
+    background: transparent;   /* 背景を透明に */
+    color: var(--primary);     /* 文字を水色 */
+    border: 2px solid var(--primary); /* 水色の枠線 */
+    padding: 12px 20px; 
+    font-family: 'Orbitron'; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    width: 100%; 
+    font-weight: bold; 
+    font-size: 1rem; 
+    transition: all 0.3s ease; /* マウスを乗せた時にフワッと色が変わるアニメーション */
+}
+.cyber-btn:hover {
+    background: var(--primary); /* マウスが乗ったら背景を水色にする */
+    color: #000;                /* 文字を黒にする */
+}
+
+/* =========================================================
+   チャット画面
+========================================================= */
+/* 上部のヘッダー（相手のアイコンと名前） */
+.game-header {
+    display: flex; 
+    align-items: center; 
+    border-bottom: 1px solid #333; /* 下線で区切る */
+    padding-bottom: 10px; 
+}
+
+/* 相手のアイコン（チャット中） */
+.header-icon {
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    background-size: cover; 
+    background-position: center; 
+    border: 2px solid var(--primary); 
+    margin-right: 15px; 
+}
+.target-profile { display: flex; align-items: center; flex: 1; }
+.header-info { display: flex; flex-direction: column; }
+#target-name { font-weight: bold; font-family: 'Orbitron'; font-size: 1.1rem;}
+.sub-text { font-size: 0.75rem; color: #888; }
+
+/* 疑惑（SUSPICION）メーター */
+.suspicion-meter { width: 80px; text-align: right; font-size: 0.7rem; }
+.meter-bar { width: 100%; height: 6px; background: #333; margin-bottom: 3px; }
+#meter-fill {
+    height: 100%; 
+    width: 0%; 
+    background: linear-gradient(90deg, yellow, red); /* 黄色から赤へのグラデーション */
+    transition: width 0.5s;    /* メーターが伸びる時のアニメーション */
+}
+
+/* チャットのメッセージ履歴エリア */
+.chat-area {
+    flex: 1;                   /* 縦の空きスペースをすべてチャットエリアにする */
+    overflow-y: auto;          /* 縦にスクロールできるようにする */
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    padding: 15px 0; 
+}
+
+/* ふきだし共通設定 */
+.message {
+    padding: 10px 14px; 
+    border-radius: 12px; 
+    max-width: 80%;            /* ふきだしの横幅が画面いっぱいに広がらないようにする */
+    font-size: 0.95rem;
+}
+/* 自分のふきだし（右寄せ） */
+.user-msg {
+    align-self: flex-end; 
+    background: #00444d; 
+    border-bottom-right-radius: 2px; /* しっぽを作る */
+}
+/* 相手のふきだし（左寄せ） */
+.ai-msg {
+    align-self: flex-start; 
+    background: #222; 
+    border-bottom-left-radius: 2px; /* しっぽを作る */
+    border: 1px solid #444; 
+}
+/* システムの通知メッセージ */
+.system-msg {
+    align-self: center; 
+    color: #666; 
+    font-size: 0.75rem; 
+    text-align: center;
+}
+
+/* 隠す用のクラス */
+.hidden { display: none !important; }
+
+/* 入力中...のアニメーション文字 */
+#typing-indicator { font-size: 0.8rem; color: #888; font-style: italic; margin-bottom: 10px; }
+
+/* 固定質問ボタンエリア */
+.topic-area { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
+.topic-btn {
+    background: rgba(0, 242, 255, 0.1); 
+    border: 1px solid var(--primary); 
+    color: var(--primary); 
+    padding: 10px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-align: left; 
+    transition: all 0.2s; 
+}
+/* 押した後のボタン */
+.topic-btn:disabled {
+    opacity: 0.4;              /* 薄くする */
+    border-color: #555; 
+    color: #555; 
+    cursor: not-allowed;       /* マウスを禁止マークにする */
+    text-decoration: line-through; /* 取り消し線を引く */
+}
+
+/* 自由入力エリア */
+.input-area { display: flex; gap: 5px; margin-bottom: 15px; }
+.input-area input {
+    flex: 1; 
+    background: #222; 
+    border: 1px solid #444; 
+    color: #fff; 
+    padding: 10px; 
+    border-radius: 5px; 
+}
+#send-btn {
+    background: var(--primary); 
+    color: #000; 
+    border: none; 
+    font-weight: bold; 
+    padding: 0 15px; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+/* 最後の決断（信じる/疑う）ボタン */
+.action-area { display: flex; gap: 10px; }
+.danger-btn { background: #800; border: 1px solid #f00; color:#fff; flex:1; padding: 12px; border-radius:5px; font-weight: bold; cursor: pointer;}
+.trust-btn { background: #060; border: 1px solid #0f0; color:#fff; flex:1; padding: 12px; border-radius:5px; font-weight: bold; cursor: pointer;}
+
+/* =========================================================
+   結果画面（WIN / LOSE）
+========================================================= */
+.result-content {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%;              /* 画面の中央に配置する */
+}
+#result-title { font-size: 2.5rem; font-family: 'Orbitron'; margin: 0; }
+#result-visual { font-size: 3.5rem; margin: 20px 0; font-weight: bold; font-family: 'Orbitron'; padding: 10px 20px; border-radius: 10px;}
+
+/* =========================================================
+   右パネル：ランキングエリア
+========================================================= */
+.ranking-header {
+    display: flex; 
+    justify-content: center; /* タイトルを中央寄せに変更 */
+    align-items: center; 
+    border-bottom: 1px solid #333; 
+    padding-bottom: 10px;
+}
+/* ランキングリセットボタン */
+.reset-btn {
+    flex: none; /* 縦に伸びるのを完全に防ぐ */
+    padding: 2px 10px; /* 上下2px、左右10pxにして縦幅を最小限に */
+    font-size: 0.75rem; /* 文字も少し小さく */
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer; 
+    background: transparent; 
+    color: #ff0055; 
+    border: 1px solid #ff0055;
+    width: 35%; 
+    align-self: center; /* 中央に配置（右下にしたい場合は flex-end に変更） */
+    margin-top: 15px; 
+    margin-bottom: -5px; /* 下にも少し余白を作る */
+    border-radius: 3px; 
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover { 
+    background: #ff0055; 
+    color: #fff; 
+}
+
+/* ランキングのリスト部分 */
+.ranking-list-container {
+    flex: 1;                   /* 余白をすべて使う */
+    overflow-y: auto;          /* 人数が増えたらスクロールさせる */
+    margin-top: 10px; 
+    padding-right: 5px;
+}
+#ranking-list { list-style: none; padding: 0; margin: 0; }
+#ranking-list li {
+    display: flex; 
+    justify-content: space-between; /* 順位・名前は左側、スコアは右側に離す */
+    align-items: center; 
+    padding: 12px 0; 
+    border-bottom: 1px dashed #444; /* 点線で区切る */
+    font-family: 'Orbitron', sans-serif; 
+}
+#ranking-list li .rank { color: #ffea00; width: 30px; font-weight: bold; font-size: 1.2rem;}
+#ranking-list li .name { flex: 1; color: #fff; font-family: 'Zen Kaku Gothic New'; font-size: 1rem;}
+#ranking-list li .score { color: var(--primary); font-weight: bold; font-size: 1.1rem;}
+
+/* =========================================================
+   全体のスクロールバー（横のゲージ）を非表示にしてスッキリさせる
+========================================================= */
+::-webkit-scrollbar { display: none; }
+
+/* 「short-video」という目印（シール）がついている動画だけ、縦幅を小さくするルール */
+.short-video {
+    height: 200vh; /* ここを好きなサイズ（例えば 400px など）に変更してね */
+     /* 映像が歪まないようにするおまじない */
+}

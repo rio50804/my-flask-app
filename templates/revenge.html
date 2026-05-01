@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVENGE GAME - Keyboard Shooter</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; }
+        #game-container { width: 100%; height: 100%; position: relative; }
+        canvas { display: block; width: 100%; height: 100%; }
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; padding: 20px; box-sizing: border-box; font-family: 'Orbitron', sans-serif; color: #fff; text-shadow: 0 0 5px #00f2ff; }
+        .hud-top { display: flex; justify-content: space-between; font-size: 1.5rem; text-shadow: 0 0 10px #00f2ff;}
+        #combo-display { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size: 2.5rem; color: #ffea00; text-shadow: 0 0 20px #ffea00; opacity: 0; transition: opacity 0.2s, transform 0.2s; font-weight: bold;}
+        #combo-display.active { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        
+        #start-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: auto; }
+        .glitch-title { font-size: 3.5rem; color: #ff0055; text-shadow: 2px 2px #00f2ff; margin-bottom: 20px; text-align: center; }
+        .instructions { color: #fff; text-align: center; margin-bottom: 30px; font-family: 'Zen Kaku Gothic New', sans-serif; line-height: 1.8; font-size: 1.1rem;}
+        .highlight { color: #00f2ff; font-weight: bold; font-size: 1.3rem;}
+        
+        .cyber-btn { background: transparent; color: #00f2ff; border: 2px solid #00f2ff; padding: 15px 40px; font-size: 1.5rem; font-family: 'Orbitron'; cursor: pointer; font-weight: bold; border-radius: 5px; box-shadow: 0 0 15px rgba(0,242,255,0.4); transition: all 0.3s;}
+        .cyber-btn:hover { background: #00f2ff; color: #000; box-shadow: 0 0 30px rgba(0,242,255,0.8); }
+        
+        .key-box { display: inline-block; padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; background: #333; margin: 0 5px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <div id="ui-layer">
+            <div class="hud-top">
+                <div id="score-display">SCORE: 0</div>
+                <div id="time-display">TIME: 60</div>
+            </div>
+            <div id="combo-display">2x COMBO!</div>
+            
+            <div id="start-screen">
+                <h1 class="glitch-title">REVENGE<br>SHOOTER</h1>
+                <div class="instructions">
+                    迫りくるターゲットの顔を撃ち落とせ！<br>
+                    <span class="key-box">A</span> <span class="key-box">D</span> または <span class="key-box">←</span> <span class="key-box">→</span> で移動<br>
+                    <span class="key-box">SPACE</span> でビーム発射（長押しで連射）<br>
+                    目標スコア：<span class="highlight">２０００点</span> 以上で制裁完了<br>
+                </div>
+                <button class="cyber-btn" id="start-btn">PRESS ENTER TO START</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const targetImageSrc = "{{ character.image }}"; 
+    </script>
+    <script src="/static/revenge.js"></script>
+</body>
+</html>
