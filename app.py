@@ -537,3 +537,6 @@ def revenge_result():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+#テストのコメント追加
